@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <title>Video Call Interface Design</title>
+    <link rel="stylesheet" href="/videoCallstyleTry.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+      integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.11.1/simplepeer.min.js"
+      integrity="sha512-0f7Ahsuvr+/P2btTY4mZIw9Vl23lS6LY/Y7amdkmUg2dqsUF+cTe4QjWvj/NIBHJoGksOiqndKQuI9yzn2hB0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <!-- <script src="/silence-detector-processor.js" defer></script> -->
+    <script src="/roomScript.js" defer></script>
+    <script>
+      const ROOM_ID = "<%= roomId %>";
+    </script>
+  </head>
+  <body>
+    <nav>
+      <img src="/img/logo1.png" class="logo" />
+      <ul>
+        <li><img src="/img/live.png" class="active2" /></li>
+        <li><img src="/img/homee.png" /></li>
+        <li><img src="/img/helpp.png" /></li>
+        <li><img src="/img/about.png" /></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <div class="video">
+        <header>
+          <div class="info">
+            <div>
+              <h2 data-text="PeaceTalks...">PeaceTalks...</h2>
+            </div>
+          </div>
+        </header>
+        <div class="videoBx">
+          <div class="img">
+            <video
+              autoplay="autoplay"
+              id="user1"
+              class="user"
+              muted="true"
+            ></video>
+            <video autoplay="autoplay" id="user2" class="user"></video>
+          </div>
+        </div>
+        <div class="btns">
+          <a href="#"><ion-icon name="videocam-outline"></ion-icon></a>
+          <a href="#"><ion-icon name="mic-outline"></ion-icon></a>
+          <a href="#" class="red" id="callButton"
+            ><ion-icon name="call-outline"></ion-icon
+          ></a>
+          <a href="#"><ion-icon name="share-outline"></ion-icon></a>
+          <a href="#"
+            ><ion-icon name="chatbubble-outline" id="chat"></ion-icon
+          ></a>
+        </div>
+      </div>
+    </div>
+    <div class="chat">
+      <h4>View Messages</h4>
+      <div class="chating">
+        <div class="messages">
+          <img src="/img/user1.png" />
+          <div>
+            <h5>Anna</h5>
+            <p>hi how are you</p>
+          </div>
+        </div>
+        <div class="messages">
+          <img src="/img/user2.png" />
+          <div>
+            <h5>Joen</h5>
+            <p>fine, what about you?</p>
+          </div>
+        </div>
+        <div class="messages">
+          <img src="/img/user1.png" />
+          <div>
+            <h5>Anna</h5>
+            <p>hi how are you</p>
+          </div>
+        </div>
+        <div class="messages">
+          <img src="/img/user2.png" />
+          <div>
+            <h5>Joen</h5>
+            <p>fine, what about you?</p>
+          </div>
+        </div>
+      </div>
+      <div class="send">
+        <a href="#"><ion-icon name="attach-outline"></ion-icon></a>
+        <input type="text" placeholder="write your message" />
+        <a href="#" class="btn"><ion-icon name="send-outline"></ion-icon></a>
+      </div>
+    </div>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

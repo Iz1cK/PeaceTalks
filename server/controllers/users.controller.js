@@ -13,37 +13,44 @@ const getUsers = catchAsync(async (req, res) => {
 });
 
 const login = catchAsync(async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password)
+  const { username, password } = req.body;
+  console.log(req.body);
+  if (!username || !password)
     throw new ApiError(httpStatus.BAD_REQUEST, "Missing data!");
-  const exists = await userModel.getUserByEmail(email);
+  const exists = await userModel.getUserByUsername(username);
   if (!exists)
     throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!");
   const match = bcrypt.compareSync(password, exists.password);
   if (!match) throw new ApiError(httpStatus.BAD_REQUEST, "Wrong password!");
   const token = jwt.sign(
-    { email: exists.email, userid: exists.userid },
+    { username: exists.username, userid: exists.userid },
     SECRET
   );
   res.status(httpStatus.OK).send({
     status: "success",
-    email: exists.email,
+    username: exists.username,
     access_token: token,
+    userId: exists.userid,
   });
 });
 
 const register = catchAsync(async (req, res) => {
-  const { password, email } = req.body;
-  if (!password || !email)
+  const { password, email, username } = req.body;
+  if (!password || !email || !username)
     throw new ApiError(httpStatus.BAD_REQUEST, "Missing data!");
-  const exists = await userModel.getUserByEmail(email);
+  const exists =
+    (await userModel.getUserByEmail(email)) ||
+    (await userModel.getUserByUsername(username));
   if (!!exists)
     throw new ApiError(httpStatus.BAD_REQUEST, "User already exists!");
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
-  const result = await userModel.createNewUser(email, hash);
+  const result = await userModel.createNewUser(email, username, hash);
   if (!result) throw new ApiError(500, "There was an error!");
-  res.status(httpStatus.OK).send({ result, status: "success" });
+  const token = jwt.sign({ username, userid: result.userid }, SECRET);
+  res
+    .status(httpStatus.OK)
+    .send({ result, status: "success", access_token: token });
 });
 
 module.exports = {

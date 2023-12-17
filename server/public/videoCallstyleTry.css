@@ -1,0 +1,385 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background: linear-gradient(to bottom, #0098a4, #1e3f77);
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+body.active {
+  padding-right: 25rem;
+}
+body .container {
+  min-height: 100%;
+  width: 100%;
+}
+body .container .video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .container .video header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px 20px;
+  z-index: 10;
+}
+body.active .container .video header {
+  width: 100%;
+  justify-content: flex-start;
+}
+body .container .video header .logo {
+  font-size: 2em;
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 30px;
+}
+body .container .video header .info {
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+body .container .video header .info p {
+  color: #555050;
+}
+
+body .container .video header .info .icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body .container .video header .info .icons a {
+  height: 40px;
+  width: 40px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  font-size: 1.4em;
+  margin-right: 10px;
+  box-shadow: 0.2rem 0.2rem 1rem rgba(51, 51, 51, 0.2);
+  transition: 0.5s ease;
+}
+body .container .video header .info .icons a:hover {
+  background: #333;
+  color: #fff;
+}
+/*end header*/
+/*video bx*/
+.videoBx {
+  position: relative;
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+.videoBx .img {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.videoBx .img .user {
+  position: relative;
+  height: 500px;
+  width: 50%;
+  object-fit: cover;
+}
+
+.user {
+  margin: 20px;
+}
+.imgBx {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /**/
+  padding: 20px;
+  flex-wrap: wrap;
+}
+.imgBx img {
+  height: 500px;
+  width: 50%;
+  object-fit: cover;
+  margin: 10px;
+}
+.btns {
+  position: absolute;
+  bottom: 5;
+  left: 20;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f2f2;
+  border-radius: 10px;
+  padding: 20px;
+}
+.btns a {
+  height: 50px;
+  width: 50px;
+  text-decoration: none;
+  border-radius: 50%;
+  margin: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  font-size: 1.3em;
+  color: #333;
+  box-shadow: 0.2rem 0.2rem 1rem rgba(51, 51, 51, 0.2);
+}
+
+.btns a:hover {
+  background: #0a3e7a;
+  color: #fff;
+}
+
+.btns a ion-icon {
+  transition: 0.5s cubic-bezier(0.5, 1.7, 0.75, 1.25);
+}
+.btns a:hover ion-icon {
+  transform: rotate(60deg);
+}
+
+.btns a.red {
+  color: #fff;
+  background: #ee3232;
+}
+.btns a.red:hover {
+  color: #311d1d;
+  background: #ee3232;
+}
+
+body.active .container .video .videoBx {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*
+body.active .container .video .videoBx .img{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+/*
+body.active .container .video .videoBx .img .user{
+    position: relative;
+    height: 600px;
+    width: 100%;
+    object-fit: cover;
+}
+/*
+body.active .container .video .videoBx .img .imgBx{
+    position: absolute;
+    top: 20;
+    right: 90;
+    height: 100%;
+    width: 70px;
+}
+/*
+body.active .container .video .videoBx .img .imgBx img{
+    height: 140px;
+    width: 140px;
+    object-fit: cover;
+    margin: 5px 0;
+}
+*/
+.chat {
+  position: fixed;
+  bottom: 10;
+  right: -120%;
+  height: 100%;
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 10px;
+  padding: 30px 20px;
+  z-index: 1000;
+  background: #f5f2f2;
+}
+.chat.active {
+  right: 0%;
+}
+.chat h4 {
+  color: #0a3e7a;
+  font-size: 1.5em;
+}
+.chat .chating {
+  display: flex;
+  flex-direction: column;
+}
+.chat .messages {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 20px 0;
+}
+.chat .messages img {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.chat .messages div {
+  background: #fff;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0.2rem 0.2rem 1rem rgba(51, 51, 51, 0.2);
+}
+.chat .send {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0.2rem 0.2rem 1rem rgba(51, 51, 51, 0.2);
+}
+.chat .send a {
+  display: inline-block;
+  padding: 20px;
+  font-size: 1.4em;
+  color: #0a3e7a;
+  border-radius: 10px;
+}
+.chat .send input {
+  outline: none;
+  border: none;
+  width: 100%;
+}
+.chat .send a.btn {
+  background: #0098a4;
+  color: #0a3e7a;
+}
+.chat .send a ion-icon {
+  transition: 0.5s cubic-bezier(0.5, 1.75, 0.75, 1.25);
+}
+.chat .send a:hover ion-icon {
+  transform: rotate(90deg);
+}
+
+@media (max-width: 1000px) {
+  body.active {
+    padding-right: 20rem;
+  }
+  .chat {
+    width: 20rem;
+  }
+}
+
+nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #182842;
+  width: 120px;
+  padding: 10px 0;
+}
+.logo {
+  width: 100px;
+  display: block;
+  margin: auto;
+  cursor: pointer;
+}
+nav ul {
+  margin-top: 160px;
+}
+nav ul il {
+  list-style: none;
+}
+nav ul li img {
+  width: 50px;
+  display: block;
+  margin: 30px auto;
+  padding: 10px;
+  cursor: pointer;
+  opacity: 0.5;
+  border-radius: 10px;
+  transition: opacity 0.5s, background 0.5s;
+}
+nav ul li img:hover {
+  opacity: 1;
+  background: #4d6181;
+}
+.active2 {
+  opacity: 1;
+  background: #4d6181;
+}
+.container {
+  margin-left: 120px;
+  padding: 0 2.5%;
+}
+.info h2 {
+  position: relative;
+  font-size: 3.5vw;
+  color: #0098a4;
+  -webkit-text-stroke: 0.3vw #0098a4;
+}
+.info h2 {
+  font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+}
+
+.info h2::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #0a3e7a;
+  -webkit-text-stroke: 0vw #0a3e7a;
+  border-right: 2px solid #0a3e7a;
+  overflow: hidden;
+  animation: animate 6s linear infinite;
+}
+@keyframes animate {
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+  70%,
+  90% {
+    width: 100%;
+  }
+}

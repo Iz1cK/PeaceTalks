@@ -1,0 +1,4 @@
+*.pem
+*.pem.org
+node_modules
+.env
