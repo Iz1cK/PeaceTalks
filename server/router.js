@@ -73,6 +73,9 @@ router.post(
 
               fs.unlinkSync(audioFilePath);
               fs.unlinkSync(convertedFilePath);
+              if (!transcription) {
+                return res.status(500).send("No transcription found.");
+              }
               let result = await translate(transcription, { to: "ar" });
               console.log(result);
               const request = {

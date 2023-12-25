@@ -52,12 +52,18 @@
               class="user"
               muted="true"
             ></video>
+            <img class="user" id="user1CamPlaceholder" style="display: none" src="/img/placeholder.png"></img>
             <video autoplay="autoplay" id="user2" class="user"></video>
+            <img class="user" id="user2CamPlaceholder" style="display: none" src="/img/placeholder.png"></img>
           </div>
         </div>
         <div class="btns">
-          <a href="#"><ion-icon name="videocam-outline"></ion-icon></a>
-          <a href="#"><ion-icon name="mic-outline"></ion-icon></a>
+          <a href="#" id="cameraButton"
+            ><ion-icon name="videocam-outline"></ion-icon
+          ></a>
+          <a href="#" id="muteButton"
+            ><ion-icon name="mic-outline"></ion-icon
+          ></a>
           <a href="#" class="red" id="callButton"
             ><ion-icon name="call-outline"></ion-icon
           ></a>

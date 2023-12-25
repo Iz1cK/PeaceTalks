@@ -47,12 +47,22 @@ const server = app.listen(port, () => {
 const io = socketIo(server, { ...corsObj });
 
 io.on("connection", (socket) => {
+  let currentRoom = null;
   socket.on("join-room", (roomId, signalData) => {
+    currentRoom = roomId;
     socket.join(roomId);
     socket.to(roomId).emit("user-connected", signalData);
 
     socket.on("disconnect", () => {
       socket.to(roomId).emit("user-disconnected");
+    });
+  });
+
+  socket.on("camera-toggled", (data) => {
+    console.log(data);
+    socket.to(currentRoom).emit("camera-toggled", {
+      userId: data.userId,
+      cameraActive: data.cameraActive,
     });
   });
 });
