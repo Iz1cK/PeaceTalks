@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="http://fonts.googleapis.com/css?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="homeStyle.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="jquery.tiltedpage-scroll.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="tiltedpage-scroll.css" />
+    <script
+      src="https://kit.fontawesome.com/38ffff779a.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <section class="top-page">
+      <div class="hero">
+        <video autoplay loop muted plays-inline class="back-video">
+          <source src="img/video.mp4" type="video/mp4" />
+        </video>
+        <nav>
+          <img src="img/logo.png" class="logo" />
+
+          <ul>
+            <li><a href="/home" class="nav-item">Home</a></li>
+            <li><a href="#" class="nav-item">About</a></li>
+            <li><a href="/contact" class="nav-item">Contact</a></li>
+            <li><a href="#" class="nav-item" id="logoutNav">Logout</a></li>
+            <li>
+              <a href="/index"><button class="letsStart">Start Now</button></a>
+            </li>
+          </ul>
+        </nav>
+        <div class="content">
+          <h2>PeaceTalks</h2>
+          <a href="#" id="generateLinkBtn">Create room</a>
+          <div class="input-field" id="linkDiv">
+            <i
+              class="fas fa-clipboard"
+              title="Copy to clipboard"
+              id="linkClipboard"
+            ></i>
+            <input type="text" placeholder="Link" id="generatedLink" disabled />
+          </div>
+          <p style="color: white; font-weight: bold; margin-top: 5px">
+            Send this link to the other party to get started.
+          </p>
+        </div>
+      </div>
+    </section>
+    <div class="main"></div>
+
+    <!----------social media section----->
+    <section id="social-media">
+      <div class="container2 text-center">
+        <p>FIND US ON SOCIAL MEDIA</p>
+        <div class="social-icons">
+          <a href="#"><img src="img/facebook-icon.png" /></a>
+          <a href="#"><img src="img/instagram-icon.png" /></a>
+          <a href="#"><img src="img/twitter-icon.png" /></a>
+          <a href="#"><img src="img/whatsapp-icon.png" /></a>
+          <a href="#"><img src="img/linkedin-icon.png" /></a>
+          <a href="#"><img src="img/snapchat-icon.png" /></a>
+        </div>
+      </div>
+    </section>
+    <section id="footer1">
+      <img src="img/wave3.png" class="footer-img" />
+      <div class="footer">
+        <div class="container3">
+          <div class="row3">
+            <div class="footer-col-1">
+              <h3>Exciting News!</h3>
+              <p>Stay tuned for our upcoming app</p>
+              <p>coming soon to enhance your experience!</p>
+              <div class="app-logo">
+                <a href="#"><img src="img/play-store.png" /></a>
+                <a href="#"><img src="img/app-store.png" /></a>
+              </div>
+            </div>
+            <div class="footer-col-2">
+              <img src="img/logo.png" />
+              <p>
+                At peaceTalk, Our Mission Is to Make the Joy and Benefits of
+                Global Connections Accessible to All.
+              </p>
+            </div>
+            <div class="footer-col-3">
+              <h3>OUR</h3>
+              <p>Aseel Samri</p>
+              <p>
+                <i class="fa-solid fa-envelope"></i>
+                <a href="mailto:aseelsamri@gmail.com">aseelsamri@gmail.com</a>
+              </p>
+              <p>
+                <i class="fa-brands fa-instagram"></i>
+                <a
+                  href="https://www.instagram.com/aseelsamri/?igshid=OGQ5ZDc2ODk2ZA==%0A"
+                  >@aseelsamri</a
+                >
+              </p>
+            </div>
+            <div class="footer-col-4">
+              <h3>TEAM</h3>
+              <p>George Joubran</p>
+              <p>
+                <i class="fa-solid fa-envelope"></i>
+                <a href="mailto:durd2001@gmail.com">durd2001@gmail.com</a>
+              </p>
+              <p>
+                <i class="fa-brands fa-instagram"></i>
+                <a
+                  href="https://www.instagram.com/george_joubran/?igshid=MzRlODBiNWFlZA%3D%3D%0A"
+                  >@george_joubran</a
+                >
+              </p>
+            </div>
+          </div>
+          <hr />
+          <p class="copyright">
+            Copyright 2023 - PEACETALKS-208654475-211622600
+          </p>
+        </div>
+      </div>
+    </section>
+    <script src="./createRoom.js"></script>
+  </body>
+</html>

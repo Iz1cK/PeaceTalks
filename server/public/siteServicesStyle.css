@@ -9,7 +9,7 @@ body {
 }
 .hero {
   width: 100%;
-  height: 100vh;
+  height: 110vh;
   background-image: linear-gradient(rgba(12, 3, 51, 0.3), rgba(12, 3, 51, 0.3));
   position: relative;
   background-position: center;
@@ -46,32 +46,6 @@ nav ul li a {
   color: #fff;
   font-size: 17px;
 }
-nav:hover {
-  width: 100%;
-  background: transparent;
-  backdrop-filter: blur(40px);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-  align-items: center;
-  z-index: 99;
-}
-nav .nav-item::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 3px;
-  background: #fff;
-  border-radius: 5px;
-  transform-origin: right;
-  transform: scaleX(0);
-  transition: transform 0.5s;
-}
-
-nav .nav-item:hover::after {
-  transform-origin: left;
-  transform: scaleX(1);
-}
 
 nav .letsStart {
   width: 130px;
@@ -103,16 +77,7 @@ nav .letsStart:hover {
   font-weight: 600;
   transition: 0.5s;
 }
-
-.content h2 {
-  font-family: Copperplate, "Copperplate Gothic Light", fantasy;
-  font-size: 140px;
-  color: #fff;
-  font-weight: 600;
-  transition: 0.5s;
-}
-.content h1:hover,
-.content h2:hover {
+.content h1:hover {
   -webkit-text-stroke: 2px #fff;
   color: transparent;
 }
@@ -128,7 +93,7 @@ nav .letsStart:hover {
 }
 .content a:hover {
   background: #fff;
-  color: #0a3e7a;
+  color: #0098a4;
 }
 .back-video {
   position: absolute;
@@ -156,18 +121,28 @@ nav .letsStart:hover {
 .content-box {
   width: 100%;
   height: 100vh;
-  background: #f2fdff;
+  background: #fff;
   position: relative;
 }
-
-.content-box h1,
-.content-box h2 {
+.head h1 {
   text-align: center;
   padding-top: 100px;
   color: #1e3f77;
 }
-.content-box h1::after,
-.content-box h2::after {
+.head h1::after {
+  content: "";
+  background: #0098a4;
+  display: block;
+  height: 3px;
+  width: 170px;
+  margin: 20px auto 50px;
+}
+.content-box h1 {
+  text-align: center;
+  padding-top: 100px;
+  color: #1e3f77;
+}
+.content-box h1::after {
   content: "";
   background: #0098a4;
   display: block;
@@ -235,8 +210,7 @@ nav .letsStart:hover {
   flex-basis: 50%;
   position: relative;
 }
-.col h1,
-.col h2 {
+.col h1 {
   margin-top: 180px;
   margin-left: 50px;
   margin-right: 50px;
@@ -266,12 +240,11 @@ nav .letsStart:hover {
   text-decoration: none;
   display: inline-block;
   color: #1e3f77;
-  font-size: 24px;
+  font-size: 16px;
   border: 2px solid #1e3f77;
-  padding: 14px 50px;
+  padding: 10px 30px;
   border-radius: 50px;
-  margin-top: 40px;
-  margin-left: 600px;
+  background: #fff;
 }
 .content-box a:hover {
   background: #1e3f77;
@@ -291,18 +264,18 @@ blockquote {
   border-radius: 50px;
 }
 /*blockquote::before{
-    content: '\201c';
-    top: 10px;
-    left: -2px;
-  }
-  blockquote::after{
-    content: '\201c';
-    bottom: -30px;
-  }
-  blockquote::before, blockquote::after{
-    font-size: 6rem;
-    position: absolute;
-  }*/
+      content: '\201c';
+      top: 10px;
+      left: -2px;
+    }
+    blockquote::after{
+      content: '\201c';
+      bottom: -30px;
+    }
+    blockquote::before, blockquote::after{
+      font-size: 6rem;
+      position: absolute;
+    }*/
 /*reviews*/
 
 .container {
@@ -314,14 +287,12 @@ blockquote {
   justify-content: center;
 }
 
-.container h1,
-.container h2 {
+.container h1 {
   text-align: center;
   padding-top: 100px;
   color: #1e3f77;
 }
-.container h1::after,
-.container h2::after {
+.container h1::after {
   content: "";
   background: #0098a4;
   display: block;
@@ -559,4 +530,244 @@ ul {
 #language {
   background: transparent;
   color: white;
+}
+
+.site {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contaner45 {
+  max-width: 2000px;
+  width: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.testi {
+  max-width: 2000px;
+  margin: 0 auto;
+}
+.testi .head {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.testi .head h3 {
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.testi .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  padding: 30px 0;
+}
+
+.testi .thumbnail {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.testi .thumbnail img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: scale(2);
+  transition: transform 0.8s;
+}
+.testi .swiper-slide-active .thumbnail img {
+  transform: scale(1);
+}
+
+.testi .thumbnail::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% + 30px);
+  height: calc(100% + 10px);
+  background-color: #1e3f77;
+  border-radius: 50%;
+  z-index: -1;
+  box-shadow: #777;
+  transition: border-radius 0.7s 0.5s;
+}
+.testi .swiper-slide-active .thumbnail::before {
+  border-radius: 33% 67% 50% 50% / 50% 14% 86% 50%;
+}
+.testi .aside {
+  position: relative;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}
+
+.testi .aside > p {
+  position: relative;
+  font-size: 30px;
+  line-height: normal;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateX(10%);
+  transition: transform 1.5s, opacity 1.5s;
+}
+.testi .swiper-slide-active .aside > p {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.testi .aside > p::before,
+.testi .aside > p::after {
+  font-family: serif;
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 1;
+  position: absolute;
+  color: #0098a4;
+  height: 40px;
+  z-index: -1;
+}
+
+.testi .aside > p::before {
+  content: open-quote;
+  top: -40px;
+  left: 10px;
+}
+.testi .aside > p::before {
+  content: close-quote;
+  right: 0;
+}
+.testi :is(.swiper-button-next, .swiper-button-prev) {
+  background-color: #1e3f77;
+  top: 35%;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  box-shadow: #777;
+}
+
+.testi :is(.swiper-button-next, .swiper-button-prev):hover {
+  background-color: #0098a4;
+}
+
+.testi :is(.swiper-button-next, .swiper-button-prev)::after {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+}
+.testi .swiper-paginatio {
+  position: relative;
+}
+.testi .swiper-pagination span {
+  background-color: #777;
+  transition: width 0.5s;
+  opacity: 1;
+}
+.testi .swiper-pagination .swiper-pagination-bullet-active {
+  width: 26px;
+  border-radius: 4px;
+  background-color: #0098a4;
+}
+
+@media screen and (min-width: 768px) {
+  .testi .wrapper {
+    flex-direction: row;
+    padding: 30px 100px;
+  }
+  .testi .thumbnail {
+    width: 200px;
+    height: 200px;
+  }
+  .testi :is(.swiper-button-next, .swiper-button-prev) {
+    top: 50%;
+  }
+}
+
+#menuIcon {
+  width: 60px;
+  border-radius: 50%;
+  position: fixed;
+  top: 40px;
+  right: 60px;
+  cursor: pointer;
+  border: 2px solid #0098a4;
+  outline: none;
+  z-index: 100;
+}
+.menu-box {
+  width: 0;
+  height: 0;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom-left-radius: 100%;
+  transition: width 0.5s, height 0.5s, border-radius 0.5s;
+}
+.menu-box.open-menu {
+  width: 100%;
+  height: 100vh;
+  border-bottom-left-radius: 0;
+}
+.menu-box.open-menu ul li {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 1s, opacity 1s;
+  transition-delay: 0.5s;
+}
+
+.menu-box ul li {
+  list-style: none;
+  margin: 20px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.menu-box ul li a {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  font-size: 50px;
+  font-weight: 600;
+  position: relative;
+  text-shadow: 0px 0px 0 #0098a4;
+  transition: text-shadow 0.5s, transform 0.5s;
+}
+
+.menu-box ul li a:hover {
+  text-shadow: -3px 3px 0 #0098a4;
+  transform: translateY(-6px);
+}
+.menu-box ul li a::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  bottom: 19px;
+  right: -18px;
+  opacity: 0;
+  box-shadow: 0 0 0 #0098a4;
+  transition: box-shadow 0.5s;
+}
+
+.menu-box ul li a:hover::after {
+  opacity: 1;
+  box-shadow: -2px 2px 0 #0098a4;
 }

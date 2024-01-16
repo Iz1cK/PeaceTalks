@@ -35,6 +35,32 @@ app.get("/home", (req, res) => {
   res.render("home");
 });
 
+app.get("/index", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get("/site-services", (req, res) => {
+  res.sendFile(__dirname + "/public/siteServices.html");
+});
+
+app.get("/create", (req, res) => {
+  res.render("createRoom.ejs");
+});
+
+app.get("/create-link", (req, res) => {
+  let roomId = uuidV4();
+  console.log(roomId);
+  let data = {
+    success: true,
+    link: `http://localhost:2312/room/${roomId}`,
+  };
+  res.send(data);
+});
+
+app.get("/contact", (req, res) => {
+  res.sendFile(__dirname + "/public/contact.html");
+});
+
 app.use("/api", router);
 
 app.use(errorConverter);
