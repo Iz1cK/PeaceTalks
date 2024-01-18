@@ -43,6 +43,10 @@ app.get("/site-services", (req, res) => {
   res.sendFile(__dirname + "/public/siteServices.html");
 });
 
+app.get("/login-home", (req, res) => {
+  res.sendFile(__dirname + "/public/loginHome.html");
+});
+
 app.get("/create", (req, res) => {
   res.render("createRoom.ejs");
 });
@@ -89,6 +93,14 @@ io.on("connection", (socket) => {
     socket.to(currentRoom).emit("camera-toggled", {
       userId: data.userId,
       cameraActive: data.cameraActive,
+    });
+  });
+
+  socket.on("translation", (data) => {
+    console.log(data);
+    socket.to(currentRoom).emit("translation", {
+      userId: data.userId,
+      translation: data.translation,
     });
   });
 });

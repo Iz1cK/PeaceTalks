@@ -1,5 +1,5 @@
 if (localStorage.getItem("access_token")) {
-  window.location.href = "/home";
+  window.location.href = "/login-home";
 }
 
 const sign_in_btn = document.querySelector("#sign-in-btn");
@@ -29,7 +29,7 @@ sign_in_form.addEventListener("submit", (e) => {
     .then((res) => {
       localStorage.setItem("access_token", res.data.access_token);
       localStorage.setItem("userid", res.data.userId);
-      window.location.href = "/home";
+      window.location.href = "/login-home";
     })
     .catch((error) => {
       const errorElement = document.querySelector("#sign_in_error");
@@ -60,7 +60,7 @@ sign_up_form.addEventListener("submit", (e) => {
     .post("/api/register", data)
     .then((res) => {
       localStorage.setItem("access_token", res.data.access_token);
-      window.location.href = "/home";
+      window.location.href = "/login-home";
     })
     .catch((error) => {
       errorElement.innerHTML = error.response.data.message;

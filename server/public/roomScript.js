@@ -14,6 +14,15 @@ let isMicActive = true;
 let isCameraActive = true;
 let localStream = null;
 
+let chat = document.querySelector("#chat");
+let chatBox = document.querySelector(".chat");
+let messages = document.querySelector(".messages");
+let chatboxdiv = document.querySelector("chating");
+chat.onclick = () => {
+  chatBox.classList.toggle("active");
+  bodypad.classList.toggle("active");
+};
+
 muteButton.addEventListener("click", () => {
   if (!localStream) return;
   isMicActive = !isMicActive;
@@ -78,21 +87,31 @@ navigator.mediaDevices
       formData.append("audio", audioBlob);
 
       try {
-        let result = await axios.post("/api/transcribe", formData, {
-          responseType: "arraybuffer",
-        });
-        console.log(result);
-        if (result.data && result.headers["content-type"] === "audio/mp3") {
-          const audioURL = URL.createObjectURL(
-            new Blob([result.data], { type: "audio/mp3" })
+        let result = await axios.post("/api/transcribe", formData);
+        console.log(result.data);
+        if (result.data) {
+          const jsonResponse = result.data;
+          const audioBase64 = jsonResponse.audioContent;
+          const translation = jsonResponse.translation;
+          const transcription = jsonResponse.transcription;
+
+          console.log("Transcription: " + transcription);
+          socket.emit("translation", {
+            userId: myUserId,
+            translation: translation,
+          });
+          const audioBlob = new Blob(
+            [Uint8Array.from(atob(audioBase64), (c) => c.charCodeAt(0))],
+            { type: "audio/mp3" }
           );
+          const audioURL = URL.createObjectURL(audioBlob);
           const audioElement = new Audio(audioURL);
           audioElement.play();
         } else {
           console.log("Unexpected result:", result);
         }
       } catch (error) {
-        console.error("Error sending audio data:", error);
+        // console.error("Error sending audio data:", error);
       }
 
       // Clear the audioChunks for next recording
@@ -164,6 +183,25 @@ navigator.mediaDevices
         camPlaceholder.style.display = "block";
         console.log(`User ${userId} turned off their camera.`);
       }
+    });
+
+    socket.on("translation", (data) => {
+      const { userId, translation } = data;
+      console.log(`user ${userId} translated: ${translation}`);
+
+      if (userId === myUserId) {
+        // This is me, I dont need the translation
+        return;
+      }
+
+      console.log("Translation: " + translation);
+
+      // var $messageDiv = $("<div>", { class: "messages" });
+      // $("<img>", { src: "/img/user1.png" }).appendTo($messageDiv);
+      // var $innerDiv = $("<div>").appendTo($messageDiv);
+      // $("<h5>").text("User1").appendTo($innerDiv);
+      // $("<p>").text(translation).appendTo($innerDiv);
+      // $("chating").append($messageDiv);
     });
 
     peer.on("stream", function (stream) {

@@ -37,7 +37,7 @@ linkDiv.addEventListener("click", (event) => {
         x: "center",
         y: "end",
       },
-      autoClose: 100000,
+      autoClose: 2000,
     });
   }
 });

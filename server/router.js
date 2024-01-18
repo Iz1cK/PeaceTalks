@@ -86,15 +86,24 @@ router.post(
                 // Select the type of audio encoding
                 audioConfig: { audioEncoding: "MP3" },
               };
-
+              if (!result) {
+                return res.status(500).send("No translation found.");
+              }
               try {
                 const [response] = await textToSpeechClient.synthesizeSpeech(
                   request
                 );
                 const audioContent = response.audioContent;
+                const base64Audio = audioContent.toString("base64"); // Encoding the audio content to base64
 
-                res.set("Content-Type", "audio/mp3");
-                res.send(audioContent);
+                const requestResult = {
+                  audioContent: base64Audio,
+                  translation: result,
+                  transcription: transcription,
+                };
+
+                // res.set("Content-Type", "audio/mp3");
+                res.json(requestResult);
               } catch (error) {
                 console.error("ERROR:", error);
                 res.sendStatus(500);

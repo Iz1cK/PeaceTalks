@@ -1,5 +1,6 @@
 const logout = document.querySelector("#logoutNav");
 if (localStorage.getItem("access_token")) {
+  window.location.href = "/login-home";
   logout.style.display = "block";
   logout.addEventListener("click", () => {
     localStorage.removeItem("access_token");
