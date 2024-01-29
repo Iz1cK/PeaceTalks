@@ -215,6 +215,24 @@ body.active .container .video .videoBx .img .imgBx img{
     margin: 5px 0;
 }
 */
+
+.lowerChat {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#languages {
+  display: inline-block;
+  text-align: center;
+  padding: 5px;
+  font-size: 1.2em;
+  color: #0a3e7a;
+  border-radius: 10px;
+  margin-top: 15px;
+  box-shadow: 0.2rem 0.2rem 1rem rgba(51, 51, 51, 0.2);
+}
+
 .chat {
   position: fixed;
   bottom: 10;
@@ -229,6 +247,10 @@ body.active .container .video .videoBx .img .imgBx img{
   z-index: 1000;
   background: #f5f2f2;
 }
+.chat::-webkit-scrollbar {
+  display: none;
+}
+
 .chat.active {
   right: 0%;
 }
@@ -239,6 +261,7 @@ body.active .container .video .videoBx .img .imgBx img{
 .chat .chating {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 .chat .messages {
   display: flex;

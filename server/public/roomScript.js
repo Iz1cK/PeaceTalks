@@ -6,6 +6,9 @@ let user1 = document.querySelector("#user1");
 let user2 = document.querySelector("#user2");
 let socket = io.connect("/");
 let myUserId = localStorage.getItem("userid");
+let myUserName = localStorage.getItem("username");
+let otherUserId;
+let otherUserName;
 
 const muteButton = document.querySelector("#muteButton");
 const cameraButton = document.querySelector("#cameraButton");
@@ -18,6 +21,17 @@ let chat = document.querySelector("#chat");
 let chatBox = document.querySelector(".chat");
 let messages = document.querySelector(".messages");
 let chatboxdiv = document.querySelector("chating");
+let languages = document.getElementById("languages");
+let chosenLanguage = languages.value;
+
+languages.addEventListener("change", (e) => {
+  chosenLanguage = languages.value;
+  socket.emit("language-changed", {
+    userId: myUserId,
+    language: chosenLanguage,
+  });
+});
+
 chat.onclick = () => {
   chatBox.classList.toggle("active");
   bodypad.classList.toggle("active");
@@ -85,6 +99,8 @@ navigator.mediaDevices
       });
       const formData = new FormData();
       formData.append("audio", audioBlob);
+      formData.append("myLanguage", chosenLanguage);
+      formData.append("otherLanguage", otherLanguage);
 
       try {
         let result = await axios.post("/api/transcribe", formData);
@@ -96,17 +112,12 @@ navigator.mediaDevices
           const transcription = jsonResponse.transcription;
 
           console.log("Transcription: " + transcription);
+          addChatMessage(myUserId, myUserName, transcription);
           socket.emit("translation", {
             userId: myUserId,
             translation: translation,
+            audioBase64,
           });
-          const audioBlob = new Blob(
-            [Uint8Array.from(atob(audioBase64), (c) => c.charCodeAt(0))],
-            { type: "audio/mp3" }
-          );
-          const audioURL = URL.createObjectURL(audioBlob);
-          const audioElement = new Audio(audioURL);
-          audioElement.play();
         } else {
           console.log("Unexpected result:", result);
         }
@@ -153,7 +164,13 @@ navigator.mediaDevices
       },
     });
     peer.on("signal", function (data) {
-      socket.emit("join-room", ROOM_ID, JSON.stringify(data));
+      let sendData = {
+        userId: myUserId,
+        username: myUserName,
+        chosenLanguage,
+        signalData: data,
+      };
+      socket.emit("join-room", ROOM_ID, JSON.stringify(sendData));
     });
 
     socket.on("connect", () => {
@@ -161,7 +178,21 @@ navigator.mediaDevices
     });
 
     socket.on("user-connected", function (data) {
-      if (peer) peer.signal(JSON.parse(data));
+      let { userId, username, chosenLanguage, signalData } = JSON.parse(data);
+      otherUserId = userId;
+      otherUserName = username;
+      otherLanguage = chosenLanguage;
+      if (peer) peer.signal(signalData);
+    });
+
+    socket.on("language-changed", (data) => {
+      const { userId, language } = data;
+      console.log(`user ${userId} changed their language to: ${language}`);
+      if (userId === myUserId) {
+        // This is me, I already know my new language
+        return;
+      }
+      otherLanguage = language;
     });
 
     socket.on("camera-toggled", (data) => {
@@ -186,22 +217,23 @@ navigator.mediaDevices
     });
 
     socket.on("translation", (data) => {
-      const { userId, translation } = data;
+      const { userId, translation, audioBase64 } = data;
       console.log(`user ${userId} translated: ${translation}`);
 
       if (userId === myUserId) {
         // This is me, I dont need the translation
         return;
       }
+      const audioBlob = new Blob(
+        [Uint8Array.from(atob(audioBase64), (c) => c.charCodeAt(0))],
+        { type: "audio/mp3" }
+      );
+      const audioURL = URL.createObjectURL(audioBlob);
+      const audioElement = new Audio(audioURL);
+      audioElement.play();
 
       console.log("Translation: " + translation);
-
-      // var $messageDiv = $("<div>", { class: "messages" });
-      // $("<img>", { src: "/img/user1.png" }).appendTo($messageDiv);
-      // var $innerDiv = $("<div>").appendTo($messageDiv);
-      // $("<h5>").text("User1").appendTo($innerDiv);
-      // $("<p>").text(translation).appendTo($innerDiv);
-      // $("chating").append($messageDiv);
+      addChatMessage(otherUserId, otherUserName, translation);
     });
 
     peer.on("stream", function (stream) {
@@ -212,3 +244,23 @@ navigator.mediaDevices
   .catch((error) => {
     console.error("Error accessing user media:", error);
   });
+
+// let sendMessageBtn = document.querySelector(".btn");
+
+// sendMessageBtn.addEventListener("click", (e) => {
+//   console.log("pressend send");
+//   addChatMessage(myUserId, myUserName, "Hello!");
+// });
+
+function addChatMessage(userid, username, translation) {
+  var messageDiv = $("<div>", { class: "messages" });
+  let imageSrc = userid == myUserId ? "/img/user1.png" : "/img/user2.png";
+  $("<img>", { src: imageSrc }).appendTo(messageDiv);
+  var $innerDiv = $("<div>").appendTo(messageDiv);
+  $("<h5>").text(username).appendTo($innerDiv);
+  $("<p>").text(translation).appendTo($innerDiv);
+  var chatContainer = $(".chating");
+  chatContainer.append(messageDiv);
+  var scrollHeight = chatContainer.prop("scrollHeight");
+  chatContainer.animate({ scrollTop: scrollHeight }, 500);
+}

@@ -11,6 +11,24 @@ const exec = require("child_process").exec;
 const textToSpeech = require("@google-cloud/text-to-speech");
 const textToSpeechClient = new textToSpeech.TextToSpeechClient();
 
+const googleLanguageCodes = {
+  ["Arabic"]: "ar-JO",
+  ["English"]: "en-US",
+  ["Hebrew"]: "iw-IL",
+};
+
+const TextToSpeechLanguageCodes = {
+  ["Arabic"]: "ar-XA",
+  ["English"]: "en-US",
+  ["Hebrew"]: "he-IL",
+};
+
+const otherLanguageCodes = {
+  ["Arabic"]: "ar",
+  ["English"]: "en",
+  ["Hebrew"]: "he",
+};
+
 // Define storage strategy
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -20,7 +38,7 @@ const client = new speech.SpeechClient();
 router.get(
   "/hello",
   catchAsync(async (req, res) => {
-    let result = await translate("Hello!", { to: "ar" });
+    let result = await translate("שלום!", { to: "ar" });
     console.log(result);
     res.send(result);
   })
@@ -36,7 +54,10 @@ router.post(
     if (!req.file) {
       return res.status(400).send("No file uploaded.");
     }
-
+    //GET LANGUAGE FROM REQ.DATA
+    const myLanguage = req.body.myLanguage;
+    const otherLanguage = req.body.otherLanguage;
+    console.log(myLanguage, otherLanguage);
     const uniqueFilename = uuidV4();
     const audioFilePath = `temp_audio_files/${uniqueFilename}.webm`;
     const convertedFilePath = `temp_audio_files/${uniqueFilename}.wav`;
@@ -58,7 +79,7 @@ router.post(
             config: {
               encoding: "LINEAR16",
               sampleRateHertz: 16000,
-              languageCode: "en-US",
+              languageCode: googleLanguageCodes[myLanguage],
             },
             audio: { content: base64Audio },
           };
@@ -76,13 +97,16 @@ router.post(
               if (!transcription) {
                 return res.status(500).send("No transcription found.");
               }
-              let result = await translate(transcription, { to: "ar" });
+              let result = await translate(transcription, {
+                to: otherLanguageCodes[otherLanguage],
+              });
               console.log(result);
               const request = {
                 input: { text: result },
-                // voice: { languageCode: "en-US", ssmlGender: "NEUTRAL" },
-                voice: { languageCode: "ar-XA", ssmlGender: "NEUTRAL" },
-                // voice: { languageCode: "he-IL", ssmlGender: "NEUTRAL" },
+                voice: {
+                  languageCode: TextToSpeechLanguageCodes[otherLanguage],
+                  ssmlGender: "NEUTRAL",
+                },
                 // Select the type of audio encoding
                 audioConfig: { audioEncoding: "MP3" },
               };

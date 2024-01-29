@@ -29,6 +29,7 @@ sign_in_form.addEventListener("submit", (e) => {
     .then((res) => {
       localStorage.setItem("access_token", res.data.access_token);
       localStorage.setItem("userid", res.data.userId);
+      localStorage.setItem("username", res.data.username);
       window.location.href = "/login-home";
     })
     .catch((error) => {
@@ -60,6 +61,8 @@ sign_up_form.addEventListener("submit", (e) => {
     .post("/api/register", data)
     .then((res) => {
       localStorage.setItem("access_token", res.data.access_token);
+      localStorage.setItem("userid", res.data.userId);
+      localStorage.setItem("username", res.data.username);
       window.location.href = "/login-home";
     })
     .catch((error) => {

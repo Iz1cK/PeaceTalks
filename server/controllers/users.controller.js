@@ -48,9 +48,13 @@ const register = catchAsync(async (req, res) => {
   const result = await userModel.createNewUser(email, username, hash);
   if (!result) throw new ApiError(500, "There was an error!");
   const token = jwt.sign({ username, userid: result.userid }, SECRET);
-  res
-    .status(httpStatus.OK)
-    .send({ result, status: "success", access_token: token });
+  res.status(httpStatus.OK).send({
+    result,
+    status: "success",
+    access_token: token,
+    username,
+    userId: result.userid,
+  });
 });
 
 module.exports = {

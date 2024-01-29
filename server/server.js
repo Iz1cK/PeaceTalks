@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const router = require("./router");
 const socketIo = require("socket.io");
 const { v4: uuidV4 } = require("uuid");
+const usersController = require("./models/users.model");
 // import cron from "./utils/cron";
 const { errorConverter, errorHandler } = require("./middlewares/error");
 
@@ -53,7 +54,6 @@ app.get("/create", (req, res) => {
 
 app.get("/create-link", (req, res) => {
   let roomId = uuidV4();
-  console.log(roomId);
   let data = {
     success: true,
     link: `http://localhost:2312/room/${roomId}`,
@@ -78,10 +78,10 @@ const io = socketIo(server, { ...corsObj });
 
 io.on("connection", (socket) => {
   let currentRoom = null;
-  socket.on("join-room", (roomId, signalData) => {
+  socket.on("join-room", (roomId, data) => {
     currentRoom = roomId;
     socket.join(roomId);
-    socket.to(roomId).emit("user-connected", signalData);
+    socket.to(roomId).emit("user-connected", data);
 
     socket.on("disconnect", () => {
       socket.to(roomId).emit("user-disconnected");
@@ -96,11 +96,20 @@ io.on("connection", (socket) => {
     });
   });
 
+  socket.on("language-changed", (data) => {
+    console.log(data);
+    socket.to(currentRoom).emit("language-changed", {
+      userId: data.userId,
+      language: data.language,
+    });
+  });
+
   socket.on("translation", (data) => {
     console.log(data);
     socket.to(currentRoom).emit("translation", {
       userId: data.userId,
       translation: data.translation,
+      audioBase64: data.audioBase64,
     });
   });
 });

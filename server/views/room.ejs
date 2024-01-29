@@ -18,6 +18,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <!-- <script src="/silence-detector-processor.js" defer></script> -->
     <script src="/roomScript.js" defer></script>
     <script>
@@ -75,41 +76,23 @@
       </div>
     </div>
     <div class="chat">
-      <h4>View Messages</h4>
+      <h4 style="text-align: center;">Chat Messages</h4>
       <div class="chating">
-        <div class="messages">
-          <img src="/img/user1.png" />
-          <div>
-            <h5>Anna</h5>
-            <p>hi how are you</p>
-          </div>
-        </div>
-        <div class="messages">
-          <img src="/img/user2.png" />
-          <div>
-            <h5>Joen</h5>
-            <p>fine, what about you?</p>
-          </div>
-        </div>
-        <div class="messages">
-          <img src="/img/user1.png" />
-          <div>
-            <h5>Anna</h5>
-            <p>hi how are you</p>
-          </div>
-        </div>
-        <div class="messages">
-          <img src="/img/user2.png" />
-          <div>
-            <h5>Joen</h5>
-            <p>fine, what about you?</p>
-          </div>
-        </div>
       </div>
-      <div class="send">
-        <a href="#"><ion-icon name="attach-outline"></ion-icon></a>
-        <input type="text" placeholder="write your message" />
-        <a href="#" class="btn"><ion-icon name="send-outline"></ion-icon></a>
+      <div class="lowerChat">
+        <div class="send">
+          <a href="#"><ion-icon name="attach-outline"></ion-icon></a>
+          <input type="text" placeholder="write your message" id="messageMessage"/>
+          <a href="#" class="btn"><ion-icon name="send-outline"></ion-icon></a>
+        </div>
+        <div class="language">
+          <!-- drop down to choose one of 3 languages Arabic,English,Hebrew-->
+          <select name="language" id="languages" >
+            <option value="Arabic">Arabic</option>
+            <option value="English">English</option>
+            <option value="Hebrew">Hebrew</option>
+          </select>
+        </div> 
       </div>
     </div>
 
