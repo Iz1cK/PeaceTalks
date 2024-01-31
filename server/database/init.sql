@@ -19,6 +19,12 @@ CREATE TABLE room(
     roomuuid uuid
 )
 
+CREATE TABLE usersinroom(
+    roomid FOREIGN KEY REFERENCES room(roomid)
+    userid FOREIGN KEY REFERENCES users(userid)
+    date DATETIME
+)
+
 INSERT INTO users (email,username,password) VALUES ('durd2001@gmail.com','Kuala','$2b$10$OjwDW7DQvNw0WXE6NHxzfup6z1EUcOj5A0ZgmRVtRt6riDeur3ByW');
 
 COMMIT;
